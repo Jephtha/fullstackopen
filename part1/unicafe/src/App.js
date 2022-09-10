@@ -1,63 +1,57 @@
+import { useState } from "react"
 
-
-const Header = (props) => {
+const Button = ({ onClick, text }) => {
   return (
-    <div>
-      <h1>{props.course}</h1>
-    </div>
+    <button onClick={onClick}>{text}</button>
     )
 }
 
-const Part = (props) => {
+const Statistics = ({allClicks}) => {
+  if (allClicks.length === 0) {
+    return (
+      <div>
+        no feedback given
+      </div>
+    )
+  }
   return (
     <div>
-      <p>{props.part.name} {props.part.exercises}</p>
-    </div>
-  )
-}
-
-const Content = (props) => {
-  return (
-    <div>
-      <Part part = {props.parts[0]} />
-      <Part part = {props.parts[1]} />
-      <Part part = {props.parts[2]} />
-    </div>
-  )
-}
-
-const Total = (props) => {
-  return (
-    <div>
-      <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+      <p>good {allClicks.filter(value => value === "G").length}</p>
+      <p>neutral {allClicks.filter(value => value === "N").length}</p>
+      <p>bad {allClicks.filter(value => value === "B").length}</p>
     </div>
   )
 }
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+  const goodClick = () => {
+    setAll(allClicks.concat('G'))
+    setGood(good + 1)
   }
 
+  const neutralClick = () => {
+    setAll(allClicks.concat('N'))
+    setNeutral(neutral + 1)
+  }
+
+  const badClick = () => {
+    setAll(allClicks.concat('B'))
+    setBad(bad + 1)
+  }
   return (
     <div>
-      <Header course = {course.name} />
-      <Content parts = {course.parts}/>
-      <Total parts = {course.parts} />
+      <h1>give feedback</h1>
+      <Button onClick={goodClick} text = "good" />
+      <Button onClick={neutralClick} text = "neutral" />
+      <Button onClick={badClick} text = "bad" />
+      <h2>statistics</h2>
+      <Statistics allClicks = {allClicks} />
     </div>
   )
 }
