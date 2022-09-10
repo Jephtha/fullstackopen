@@ -14,11 +14,20 @@ const Statistics = ({allClicks}) => {
       </div>
     )
   }
+
+  const goodValues = allClicks.filter(value => value === "G").length
+  const neutralValues = allClicks.filter(value => value === "N").length
+  const badValues = allClicks.filter(value => value === "B").length
+  const total =goodValues + neutralValues + badValues
+
   return (
     <div>
-      <p>good {allClicks.filter(value => value === "G").length}</p>
-      <p>neutral {allClicks.filter(value => value === "N").length}</p>
-      <p>bad {allClicks.filter(value => value === "B").length}</p>
+      <p>good {goodValues}</p>
+      <p>neutral {neutralValues}</p>
+      <p>bad {badValues}</p>
+      <p>all {total}</p>
+      <p>average {(goodValues - badValues) / total}</p>
+      <p>positive {(goodValues / total) * 100} %</p>
     </div>
   )
 }
