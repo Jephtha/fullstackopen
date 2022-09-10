@@ -1,35 +1,45 @@
-
-const Hello = (props) => {
+const Header = (props) => {
   return (
     <div>
-      <p>
-        Hello {props.name}, you are {props.age} years old
-      </p>
+      <h1>{props.course}</h1>
+    </div>
+    )
+}
+
+const Content = (props) => {
+  return (
+    <div>
+      <p>{props.pt1} {props.ex1}</p>
+      <p>{props.pt2} {props.ex2}</p>
+      <p>{props.pt3} {props.ex3}</p>
     </div>
   )
 }
 
-const Footer = () => {
+const Total = (props) => {
   return (
     <div>
-      greeting app created by <a href="https://github.com/Jephtha">Jephthah</a>
+      <p>Number of exercises {props.ex1 + props.ex2 + props.ex3}</p>
     </div>
   )
 }
 
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
+  const exercises1 = 10
+  const part2 = 'Using props to pass data'
+  const exercises2 = 7
+  const part3 = 'State of a component'
+  const exercises3 = 14
 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
-      <Footer />
+      <Header course = {course} />
+      <Content pt1 = {part1} pt2 = {part2} pt3 = {part3} ex1 = {exercises1} ex2 = {exercises2} ex3 = {exercises3} />
+      <Total ex1 = {exercises1} ex2 = {exercises2} ex3 = {exercises3} />
     </div>
   )
 }
 
-export default App;
-
+export default App
