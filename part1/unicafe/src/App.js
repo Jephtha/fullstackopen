@@ -6,6 +6,15 @@ const Button = ({ onClick, text }) => {
     )
 }
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
+
 const Statistics = ({allClicks}) => {
   if (allClicks.length === 0) {
     return (
@@ -18,16 +27,20 @@ const Statistics = ({allClicks}) => {
   const goodValues = allClicks.filter(value => value === "G").length
   const neutralValues = allClicks.filter(value => value === "N").length
   const badValues = allClicks.filter(value => value === "B").length
-  const total =goodValues + neutralValues + badValues
+  const total = goodValues + neutralValues + badValues
 
   return (
     <div>
-      <p>good {goodValues}</p>
-      <p>neutral {neutralValues}</p>
-      <p>bad {badValues}</p>
-      <p>all {total}</p>
-      <p>average {(goodValues - badValues) / total}</p>
-      <p>positive {(goodValues / total) * 100} %</p>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value ={goodValues} />
+          <StatisticLine text="neutral" value ={neutralValues} />
+          <StatisticLine text="bad" value ={badValues} />
+          <StatisticLine text="all" value ={total} />
+          <StatisticLine text="average" value ={(goodValues - badValues) / total} />
+          <StatisticLine text="positive" value ={(goodValues / total) * 100} />
+        </tbody>
+      </table>
     </div>
   )
 }
