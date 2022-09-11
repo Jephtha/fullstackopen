@@ -38,7 +38,7 @@ const Statistics = ({allClicks}) => {
           <StatisticLine text="bad" value ={badValues} />
           <StatisticLine text="all" value ={total} />
           <StatisticLine text="average" value ={(goodValues - badValues) / total} />
-          <StatisticLine text="positive" value ={(goodValues / total) * 100} />
+          <StatisticLine text="positive" value = {(goodValues / total) * 100 + "%"} />
         </tbody>
       </table>
     </div>
